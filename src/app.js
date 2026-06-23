@@ -49,6 +49,17 @@ app.use(requestLogger);
 // Applied to ALL routes before any route handler runs
 app.use(globalRateLimiter);
 
+app.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'API is running',
+    endpoints: {
+      health: '/health',
+      api: '/api'
+    }
+  });
+});
+
 // ── Health Check ─────────────────────────────────────────────
 // Before API routes — health check has no business logic
 // Has its own rate limiter (separate from global)
